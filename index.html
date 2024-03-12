@@ -1,0 +1,148 @@
+<script>
+var count = 0;
+
+function enablementChanged(id)
+{
+  const checkbox = document.getElementById(id);
+  const progressbar = document.getElementById("progressbar");
+  console.log(checkbox);
+  console.log(checkbox.checked);
+  console.log(checkbox.checked);
+  console.log(checkbox.checked);
+
+  var enabled = checkbox.checked;
+
+  // always keep the checkbox checked
+  // and let the background job do the
+  // actual update
+  checkbox.checked = true;
+  checkbox.disabled = true;
+
+  count++;
+  progressbar.style.visibility = "visible";
+
+  var rand = 100 + (Math.random() * 1400);
+
+  setTimeout(() => {
+    var failed = (id == "fails") && (Math.floor(Math.random() * 2) == 1);
+    console.log(failed);
+
+    count--;
+
+    progressbar.style.visibility = (count == 0 ? "hidden" : "visible");
+
+    if (failed) {
+      alert("We could not " + (enabled ? "register" : "unregister") + " the repository because sunspots affected our backend. Please try again.");
+      checkbox.checked = !enabled;
+    } else {
+      checkbox.checked = enabled;
+    }
+
+    checkbox.disabled = false;
+  }, rand);
+
+}
+</script>
+
+<style>
+table {
+  border-collapse: collapse;
+}
+
+td {
+  border-top: solid 1px #cccccc;
+  border-bottom: solid 1px #cccccc;
+  padding: 5px;
+}
+
+#progress {
+  width: 300px;
+  height: 50px;
+  overflow: hidden;
+}
+#progressbar {
+  width: 500px;
+  margin: -125px 0 0 -100px;
+}
+</style>
+
+<div style="border: solid 1px #aaaaaa; width: 300px;">
+<table>
+<tr>
+<td width=100%>
+ ethomson/actionstest 
+</td>
+<td>
+ <input id="actionstest" type=checkbox onClick="enablementChanged('actionstest')">
+</td>
+</tr>
+<tr>
+<td>
+ ethomson/calculator 
+</td>
+<td>
+ <input id="calculator" type=checkbox onClick="enablementChanged('calculator')">
+</td>
+</tr>
+</input>
+<tr>
+<td>
+ ethomson/ethomson 
+</td>
+<td>
+ <input id="ethomson" type=checkbox onClick="enablementChanged('ethomson')">
+</td>
+</tr>
+</input>
+<tr>
+<td>
+ ethomson/fails
+</td>
+<td>
+ <input id="fails" type=checkbox onClick="enablementChanged('fails')">
+</td>
+</tr>
+<tr>
+<td>
+ ethomson/foobar 
+</td>
+<td>
+ <input id="foobar" type=checkbox onClick="enablementChanged('foobar')">
+</td>
+</tr>
+</input>
+<tr>
+<td>
+ ethomson/minder 
+</td>
+<td>
+ <input id="minder" type=checkbox onClick="enablementChanged('minder')">
+</td>
+</tr>
+</input>
+<tr>
+<td>
+ ethomson/minder-frontend
+</td>
+<td>
+ <input id="minder-frontend" type=checkbox onClick="enablementChanged('minder-frontend')">
+</td>
+</tr>
+</input>
+<tr>
+<td>
+ ethomson/repo1 
+</td>
+<td>
+ <input id="repo1" type=checkbox onClick="enablementChanged('repo1')">
+</td>
+</tr>
+</table>
+</div>
+
+<div id="progress">
+<img id="progressbar" src="progressbar.gif" style="visibility: hidden;">
+</div>
+
+</input>
+
